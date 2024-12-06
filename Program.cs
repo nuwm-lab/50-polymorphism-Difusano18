@@ -6,9 +6,9 @@ namespace PolymorphismExample
     public class BaseClass
     {
         // Віртуальний метод
-        public virtual void ShowInfo()
+        public virtual void DisplayMessage()
         {
-            Console.WriteLine("Це метод базового класу.");
+            Console.WriteLine("Це повідомлення з базового класу.");
         }
     }
 
@@ -16,9 +16,9 @@ namespace PolymorphismExample
     public class DerivedClass1 : BaseClass
     {
         // Перевизначення віртуального методу
-        public override void ShowInfo()
+        public override void DisplayMessage()
         {
-            Console.WriteLine("Це метод похідного класу 1.");
+            Console.WriteLine("Це повідомлення з похідного класу 1.");
         }
     }
 
@@ -26,9 +26,9 @@ namespace PolymorphismExample
     public class DerivedClass2 : BaseClass
     {
         // Перевизначення віртуального методу
-        public override void ShowInfo()
+        public override void DisplayMessage()
         {
-            Console.WriteLine("Це метод похідного класу 2.");
+            Console.WriteLine("Це повідомлення з похідного класу 2.");
         }
     }
 
@@ -36,27 +36,21 @@ namespace PolymorphismExample
     {
         static void Main(string[] args)
         {
-            // Змінна для вибору об'єкта
-            Console.WriteLine("Виберіть, який об'єкт створити (1 - DerivedClass1, 2 - DerivedClass2):");
-            int userChoose = int.Parse(Console.ReadLine());
+            // Масив для зберігання об'єктів
+            BaseClass[] objects = new BaseClass[2];
 
-            // Змінна для збереження базового класу
-            BaseClass obj;
+            // Створення об'єктів динамічно
+            Console.WriteLine("Створюємо об'єкт 1 (DerivedClass1):");
+            objects[0] = new DerivedClass1();
 
-            // Динамічне створення об'єкта залежно від вибору
-            if (userChoose == 1)
+            Console.WriteLine("Створюємо об'єкт 2 (DerivedClass2):");
+            objects[1] = new DerivedClass2();
+
+            // Виклик віртуальних методів через базовий клас
+            foreach (BaseClass obj in objects)
             {
-                obj = new DerivedClass1(); // Створення об'єкта похідного класу 1
-                Console.WriteLine("Створено об'єкт DerivedClass1.");
+                obj.DisplayMessage(); // Викликається метод відповідного похідного класу
             }
-            else
-            {
-                obj = new DerivedClass2(); // Створення об'єкта похідного класу 2
-                Console.WriteLine("Створено об'єкт DerivedClass2.");
-            }
-
-            // Виклик віртуального методу через вказівник на базовий клас
-            obj.ShowInfo();
 
             Console.WriteLine("Робота програми завершена.");
         }
