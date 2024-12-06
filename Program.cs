@@ -1,31 +1,34 @@
 ﻿using System;
 
-namespace VirtualMethodsExample
+namespace PolymorphismExample
 {
     // Базовий клас
-    class BaseClass
+    public class BaseClass
     {
-        public virtual void DisplayInfo()
+        // Віртуальний метод
+        public virtual void DisplayMessage()
         {
-            Console.WriteLine("Це метод базового класу.");
+            Console.WriteLine("Це повідомлення з базового класу.");
         }
     }
 
     // Похідний клас 1
-    class DerivedClass1 : BaseClass
+    public class DerivedClass1 : BaseClass
     {
-        public override void DisplayInfo()
+        // Перевизначення віртуального методу
+        public override void DisplayMessage()
         {
-            Console.WriteLine("Це метод похідного класу 1.");
+            Console.WriteLine("Це повідомлення з похідного класу 1.");
         }
     }
 
     // Похідний клас 2
-    class DerivedClass2 : BaseClass
+    public class DerivedClass2 : BaseClass
     {
-        public override void DisplayInfo()
+        // Перевизначення віртуального методу
+        public override void DisplayMessage()
         {
-            Console.WriteLine("Це метод похідного класу 2.");
+            Console.WriteLine("Це повідомлення з похідного класу 2.");
         }
     }
 
@@ -33,24 +36,23 @@ namespace VirtualMethodsExample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Оберіть режим роботи (1 або 2):");
-            string userChoice = Console.ReadLine();
+            // Масив для зберігання об'єктів
+            BaseClass[] objects = new BaseClass[2];
 
-            BaseClass obj;
+            // Створення об'єктів динамічно
+            Console.WriteLine("Створюємо об'єкт 1 (DerivedClass1):");
+            objects[0] = new DerivedClass1();
 
-            if (userChoice == "1")
+            Console.WriteLine("Створюємо об'єкт 2 (DerivedClass2):");
+            objects[1] = new DerivedClass2();
+
+            // Виклик віртуальних методів через базовий клас
+            foreach (BaseClass obj in objects)
             {
-                obj = new DerivedClass1();
-            }
-            else
-            {
-                obj = new DerivedClass2();
+                obj.DisplayMessage(); // Викликається метод відповідного похідного класу
             }
 
-            // Виклик віртуального методу через вказівник на базовий клас
-            obj.DisplayInfo();
-
-            Console.WriteLine("Змінюємо методи на звичайні для перевірки.");
+            Console.WriteLine("Робота програми завершена.");
         }
     }
 }
